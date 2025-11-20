@@ -1,3 +1,10 @@
+import sys
+import types
+
+# Patch removed Python 3.13 modules BEFORE importing anything that uses them
+if sys.version_info >= (3, 13):
+    for mod in ['aifc', 'sunau', 'pyaudioop', 'audioop']:
+        sys.modules[mod] = types.ModuleType(mod)
 import streamlit as st
 import speech_recognition as sr
 import nltk
